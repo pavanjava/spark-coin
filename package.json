@@ -1,0 +1,14 @@
+{
+  "name": "spark-coin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pavanjava/spark-coin.git",
+  "author": "H156759 <pavan.mantha@honeywell.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "node src/main.js"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
