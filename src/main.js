@@ -14,3 +14,11 @@ sCoin.addTransactions(new Block(1,new Date().toLocaleDateString(),{toAddress: 'g
 sCoin.addTransactions(new Block(2,new Date().toLocaleDateString(),{toAddress: 'sdsdkfhmfn', fromAddress: 'tiyuiotyur', amount: '$100'}));
 
 console.log(sCoin.chain);
+console.log(`Is Chain valid ? ${sCoin.isChainValid()}`);
+
+//Tamper the data for one of the blocks
+sCoin.chain[1].data = {toAddress: 'gasdhgfyte', fromAddress: '9949493991', amount: '$300'};
+//recompute the hash
+sCoin.chain[1].computeHash();
+
+console.log(`Is Chain valid ? ${sCoin.isChainValid()}`);
