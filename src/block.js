@@ -1,17 +1,16 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Block {
-    constructor(index, timestamp, data, previousHash = '') {
-        this.index = index;
+    constructor(timestamp, transactions, previousHash = '') {
         this.timestamp = timestamp;
-        this.data = data;
+        this.transactions = transactions;
         this.previousHash = previousHash;
         this.hash = this.computeHash();
         this.nonce = 0
     }
 
     computeHash = () => {
-        return SHA256(this.index + this.timestamp + JSON.stringify(this.data) + this.previousHash + this.nonce).toString();
+        return SHA256(this.timestamp + JSON.stringify(this.data) + this.previousHash + this.nonce).toString();
     }
 
     // proof of work concept using bitcoin concept of starting hash with few zeros
