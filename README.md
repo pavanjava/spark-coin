@@ -8,3 +8,4 @@ please visit the repos in the following order
 - verification-and-validation
 - proof-of-work
 - rewards & transaction
+- signing & securing
