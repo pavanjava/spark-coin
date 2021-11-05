@@ -1,6 +1,9 @@
 const BlockChain = require('./block-chain');
 const Block = require('./block');
 const Transaction = require('./transaction');
+const EC = require('elliptic').ec;
+
+const ec = new EC('secp256k1');
 
 /**
  * {
@@ -10,19 +13,19 @@ const Transaction = require('./transaction');
  * }
  *
  */
+
+const myKey = ec.keyFromPrivate('d8d1e35cb883fd1dadcc9f61712a590837cadc0b7ed68f436e0ef5509e450ab7');
+const myWalletAddress = myKey.getPublic('hex');
+
 const sCoin = new BlockChain();
-sCoin.createTransaction(new Transaction('addr1','addr2',30));
-sCoin.createTransaction(new Transaction('addr2','addr3',130));
-sCoin.createTransaction(new Transaction('addr2','addr1',300));
-sCoin.createTransaction(new Transaction('addr1','addr4',230));
+const trx1 = new Transaction(myWalletAddress,'to address public key',300);
+trx1.signTransaction(myKey);
+sCoin.addTransaction(trx1);
 
 console.log(`Starting the miner......`);
-sCoin.minePendingTransactions('9949493991');
-console.log(`my rewards: ${sCoin.checkBalance('9949493991')}`);
+sCoin.minePendingTransactions(myWalletAddress);
+console.log(`my rewards: ${sCoin.checkBalance(myWalletAddress)}`);
 
-console.log(`Starting the miner again......`);
-sCoin.minePendingTransactions('9949493991');
-console.log(`my rewards: ${sCoin.checkBalance('9949493991')}`);
 
 console.log(sCoin.chain);
 console.log(`Is Chain valid ? ${sCoin.isChainValid()}`);
